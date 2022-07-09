@@ -18,13 +18,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})
+->middleware('auth')
+->name('dashboard');
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+Route::prefix('meetings')
+->middleware('auth')
+->group(function () {
 
-    Route::controller([ZoomMeetingController::class], function () {
+    Route::controller(ZoomMeetingController::class)->group(function () {
+
+        Route::get('/meetings/{id}', 'show')
+        ->name('meetings.show');
+
+        Route::post('/meetings_store', 'store')
+        ->name('meetings.store');
+
+        Route::put('/meetings_update', 'update')
+        ->name('meetings.update');
 
     });
 

@@ -25,16 +25,16 @@ class ZoomMeetingController extends Controller
 
     public function store(Request $request)
     {
-        $this->create($request->all());
+        $data = $this->create($request->all());
 
-        return redirect()->route('meetings.index');
+        return view('meetings.index', compact('data'));
     }
 
     public function update(Request $request, $meeting)
     {
         $this->update($meeting->zoom_meeting_id, $request->all());
 
-        return redirect()->route('meetings.index');
+        return redirect()->route('meetings.show');
     }
 
     public function destroy(ZoomMeeting $meeting)
