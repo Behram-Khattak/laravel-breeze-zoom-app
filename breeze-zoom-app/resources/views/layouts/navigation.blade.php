@@ -15,15 +15,8 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('meetings.store')">
+                    <x-nav-link :href="route('meetings.index')">
                         {{ __('Create Meeting') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('meetings.update')">
-                        {{ __('Update Meeting') }}
-                    </x-nav-link>
-                    <?php  $id = 1;?>
-                    <x-nav-link :href="route('meetings.show', $id)">
-                        {{ __('Get Meeting') }}
                     </x-nav-link>
                 </div>
             </div>

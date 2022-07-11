@@ -16,6 +16,11 @@ class ZoomMeetingController extends Controller
     const MEETING_TYPE_RECURRING = 3;
     const MEETING_TYPE_FIXED_RECURRING_FIXED = 8;
 
+    public function index()
+    {
+        return view('meetings.index');
+    }
+
     public function show($id)
     {
         $meeting = $this->get($id);
@@ -25,7 +30,7 @@ class ZoomMeetingController extends Controller
 
     public function store(Request $request)
     {
-        $data = $this->create($request->all());
+        $data = $this->create($request);
 
         return view('meetings.index', compact('data'));
     }

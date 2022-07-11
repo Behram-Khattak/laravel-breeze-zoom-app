@@ -2,6 +2,7 @@
 
 namespace App\Trait;
 
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
 
@@ -51,23 +52,29 @@ trait ZoomMeetingTrait
         }
     }
 
-    public function create($data)
+    public function create($request)
     {
         $path = 'users/me/meetings';
         $url = $this->retrieveZoomUrl();
 
+        $request['topic'] = "Development in Pakistan";
+        $request['agenda'] = "Development";
+        $request['start_time'] = now();
+        $request['duration'] = $request['start_time']->diffInSeconds(now());
+        // $timezone = ;
+
         $body = [
             'headers' => $this->headers,
             'body'    => json_encode([
-                'topic'      => $data['topic'],
+                'topic'      => $request['topic'],
                 'type'       => self::MEETING_TYPE_SCHEDULE,
-                'start_time' => $this->toZoomTimeFormat($data['start_time']),
-                'duration'   => $data['duration'],
-                'agenda'     => (! empty($data['agenda'])) ? $data['agenda'] : null,
-                'timezone'     => 'Asia/Kolkata',
+                'start_time' => $this->toZoomTimeFormat($request['start_time']),
+                'duration'   => $request['duration'],
+                'agenda'     => (! empty($request['agenda'])) ? $request['agenda'] : null,
+                'timezone'     => "Asia/Pakistan",
                 'settings'   => [
-                    'host_video'        => ($data['host_video'] == "1") ? true : false,
-                    'participant_video' => ($data['participant_video'] == "1") ? true : false,
+                    'host_video'        => ($request->user()->id == "1") ? true : false,
+                    'participant_video' => ($request['participant_video'] == "1") ? true : false,
                     'waiting_room'      => true,
                 ],
             ]),

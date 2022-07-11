@@ -30,10 +30,13 @@ Route::prefix('meetings')
 
     Route::controller(ZoomMeetingController::class)->group(function () {
 
+        Route::get('/meetings', 'index')
+        ->name('meetings.index');
+
         Route::get('/meetings/{id}', 'show')
         ->name('meetings.show');
 
-        Route::post('/meetings_store', 'store')
+        Route::get('/meetings_store', 'store')
         ->name('meetings.store');
 
         Route::put('/meetings_update', 'update')
