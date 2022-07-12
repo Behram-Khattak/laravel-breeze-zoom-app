@@ -36,7 +36,7 @@ Route::prefix('meetings')
         Route::get('/meetings/{id}', 'show')
         ->name('meetings.show');
 
-        Route::get('/meetings_store', 'store')
+        Route::post('/meetings_store', 'store')
         ->name('meetings.store');
 
         Route::put('/meetings_update', 'update')

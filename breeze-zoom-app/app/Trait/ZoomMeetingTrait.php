@@ -57,24 +57,18 @@ trait ZoomMeetingTrait
         $path = 'users/me/meetings';
         $url = $this->retrieveZoomUrl();
 
-        $request['topic'] = "Development in Pakistan";
-        $request['agenda'] = "Development";
-        $request['start_time'] = now();
-        $request['duration'] = $request['start_time']->diffInSeconds(now());
-        // $timezone = ;
-
         $body = [
             'headers' => $this->headers,
             'body'    => json_encode([
-                'topic'      => $request['topic'],
+                'topic'      => $request['meeting_topic'],
                 'type'       => self::MEETING_TYPE_SCHEDULE,
-                'start_time' => $this->toZoomTimeFormat($request['start_time']),
-                'duration'   => $request['duration'],
-                'agenda'     => (! empty($request['agenda'])) ? $request['agenda'] : null,
+                'start_time' => $this->toZoomTimeFormat($request['meeting_start_time']),
+                'duration'   => $request['meeting_duration'],
+                'agenda'     => (! empty($request['meeting_agenda'])) ? $request['meeting_agenda'] : null,
                 'timezone'     => "Asia/Pakistan",
                 'settings'   => [
-                    'host_video'        => ($request->user()->id == "1") ? true : false,
-                    'participant_video' => ($request['participant_video'] == "1") ? true : false,
+                    'host_video'        => ($request->user()->name) ? true : false,
+                    'participant_video' => ($request['meeting_participant_video']) ? true : false,
                     'waiting_room'      => true,
                 ],
             ]),
