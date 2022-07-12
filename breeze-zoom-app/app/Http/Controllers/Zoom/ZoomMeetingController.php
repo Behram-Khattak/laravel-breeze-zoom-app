@@ -30,13 +30,13 @@ class ZoomMeetingController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'meeting_topic' => ['required', 'string'],
-            'meeting_agenda' => ['required', 'string'],
-            'meeting_start_time' => ['required'],
-            'meeting_duration' => ['required', 'string'],
-            'meeting_timezone' => ['required', 'string'],
-        ]);
+        // $request->validate([
+        //     'meeting_topic' => ['required', 'string'],
+        //     'meeting_agenda' => ['required', 'string'],
+        //     'meeting_start_time' => ['required'],
+        //     'meeting_duration' => ['required', 'string'],
+        //     'meeting_timezone' => ['required', 'string'],
+        // ]);
 
         $meeting_data = $this->create($request);
 
