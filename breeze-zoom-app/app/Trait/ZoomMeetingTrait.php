@@ -65,9 +65,9 @@ trait ZoomMeetingTrait
                 'start_time' => $this->toZoomTimeFormat($request['meeting_start_time']),
                 'duration'   => $request['meeting_duration'],
                 'agenda'     => (! empty($request['meeting_agenda'])) ? $request['meeting_agenda'] : null,
-                'timezone'     => "Asia/Pakistan",
+                'timezone'     => $request['meeting_timezone'],
                 'settings'   => [
-                    'host_video'        => ($request->user()->name) ? true : false,
+                    'host_video'        => ($request->user()->id) ? true : false,
                     'participant_video' => ($request['meeting_participant_video']) ? true : false,
                     'waiting_room'      => true,
                 ],

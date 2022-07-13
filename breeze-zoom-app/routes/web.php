@@ -39,9 +39,11 @@ Route::prefix('meetings')
         Route::post('/meetings_store', 'store')
         ->name('meetings.store');
 
-        Route::put('/meetings_update', 'update')
+        Route::put('/meetings_update/{id}', 'update')
         ->name('meetings.update');
 
+        Route::get('/meetings_delete/{id}', 'destroy')
+        ->name('meetings.destroy');
     });
 
 });
